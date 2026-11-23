@@ -1,0 +1,23 @@
+name: Generateur Samsung TV WGT
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Recuperation des fichiers
+        uses: actions/checkout@v4
+
+      - name: Creation du fichier WGT
+        run: |
+          mkdir -p output
+          zip -9 output/Coran-Samsung.wgt index.html config.xml
+
+      - name: Publication du fichier
+        uses: actions/upload-artifact@v4
+        with:
+          name: Coran-Samsung-TV
+          path: output/Coran-Samsung.wgt
